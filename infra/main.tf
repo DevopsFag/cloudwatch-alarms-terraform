@@ -20,9 +20,9 @@ resource "aws_cloudwatch_dashboard" "main" {
         "stat": "Maximum",
         "region": "eu-west-1",
         "title": "Total number of accounts"
-      },
-      
-      {
+      }
+    },
+    {
       "type": "metric",
       "x": 1,
       "y": 1,
@@ -38,10 +38,16 @@ resource "aws_cloudwatch_dashboard" "main" {
         "period": 300,
         "stat": "Maximum",
         "region": "eu-west-1",
-        "title": "Total amunt of money in bank"
+        "title": "Total amount of money in bank"
       }
     }
   ]
 }
 DASHBOARD
+}
+
+module "alarm" {
+  source = "./alarm_module"
+  alarm_email = "kihv001@student.kristiania.no"
+  prefix = var.student_name 
 }
