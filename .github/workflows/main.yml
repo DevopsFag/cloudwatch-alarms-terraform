@@ -25,11 +25,13 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
-        working-directory: .infra/
+        working-directory: ./infra
 
       - name: Terraform Plan
         id: plan
+         working-directory: ./infra
         run: terraform plan   -var="prefix=$PREFIX" -no-color
+        
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
@@ -37,4 +39,5 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        working-directory: ./infra
         run: terraform apply -var="prefix=$PREFIX" -var="image=$IMAGE"  -auto-approve
