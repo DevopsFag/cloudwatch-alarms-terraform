@@ -29,7 +29,7 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-         working-directory: ./infra
+        working-directory: ./infra
         run: terraform plan   -var="prefix=$PREFIX" -no-color
         
 
